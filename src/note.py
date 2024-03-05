@@ -1,16 +1,18 @@
 import datetime
-import time
 
 class Note:
 
-    notes = []
+    notes = {}
+    id_counter = 1
 
     def __init__(self, title, content, author):
         self.title = title
         self.content = content
         self.author = author
         self.creation_date = datetime.datetime.now()
-        self.notes.append(self)
+        self.id = Note.id_counter
+        Note.id_counter += 1
+        self.notes[self.id] = self
         print(f"Note {len(self.notes)} created")
     
     def __repr__(self):
@@ -21,11 +23,8 @@ class Note:
 
     @staticmethod
     def get_notes():
-        print(Note.notes)
-
-
-note1 = Note('the first note', 'Hello World!', 'Steve Wozniak')
-note2 = Note('the second note', 'Hello Friend!', 'Fred Ali')
-note1.remove()
-
-Note.get_notes()
+        return Note.notes
+    
+    @staticmethod
+    def get_note(id):
+        return Note.notes[id]
