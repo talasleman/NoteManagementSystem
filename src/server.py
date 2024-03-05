@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from note import Note
+from csv_parser import read_csv
+from csv_writer import populate_csv
+
+populate_csv()
+read_csv()
 
 class NoteSchema(BaseModel):
     title: str
